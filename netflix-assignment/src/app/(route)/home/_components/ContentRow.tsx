@@ -12,7 +12,6 @@ type Props = {
 };
 
 export default function ContentRow({ title, content }: Props) {
-    // if (content.length === 0) return null;
 
 
   if (!content || content.length === 0) return null;
