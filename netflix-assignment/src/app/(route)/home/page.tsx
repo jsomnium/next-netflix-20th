@@ -1,20 +1,23 @@
+import { useContentStore } from '@/store/useContentStore';
 import Header from './_components/Header';
 import MovieCategory from './_components/MovieCategory';
-import MovieRow from './_components/MovieRow';
+import MovieRow from './_components/ContentRow';
+import NavBar from './_components/NavBar';
 import Preview from './_components/Preview';
 import Span from './_components/Span';
+import TvCategory from './_components/TvCategory';
 
 
 export default function Home() {
+
   return (
-    <div className='overflow-y-auto scrollbar-hide w-full min-h-[100vh] flex flex-col items-center'>
+    <div className='relative w-full h-auto pb-[80px] flex flex-col items-center'>
       <Header/>
+      <NavBar/>
       <Span/>
       <Preview/>
-      <MovieRow category='popular' title='Popular'/>
-      <MovieRow category='top_rated' title='Top Rated'/>
-
-      {/* <MovieCategory/> */}
+      <MovieCategory />
+      <TvCategory />
     </div>
   );
 }

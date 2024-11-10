@@ -42,7 +42,7 @@ export default function Footer() {
     };
 
     return (
-        <footer className="absolute bottom-0 w-full h-[48px] flex justify-around items-center">
+        <footer className="fixed bottom-0 w-[375px] h-[48px] flex justify-around items-center bg-black">
             {navItems.map((item) => {
                 const Icon = item.icon;
                 const isActive = activeIndex === item.id;

@@ -1,12 +1,12 @@
 "use client"
 
 import { useContentStore } from '@/store/useContentStore';
-import {  movieCategories } from '../../../../data/categories';
+import { tvCategories } from '../../../../data/categories';
 import ContentRow from './ContentRow';
 import { useEffect } from 'react';
 
-export default function MovieCategory() {
-    const { fetchAllContents, movies, loading } = useContentStore();
+export default function TvCategory() {
+    const { fetchAllContents, tvShows, loading } = useContentStore();
 
   useEffect(() => {
     fetchAllContents();
@@ -17,8 +17,8 @@ export default function MovieCategory() {
   }
   return (
     <>
-      {movieCategories.map((item) => (
-        <ContentRow key={item.category} title={item.title} content={movies[item.category]}/>
+      {tvCategories.map((item) => (
+        <ContentRow key={item.category} title={item.title} content={tvShows[item.category]}/>
       ))}
     </>
   );
