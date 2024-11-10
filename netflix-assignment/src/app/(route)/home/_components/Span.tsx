@@ -4,7 +4,7 @@ import RightArrow from '../../../../assets/svg/RightArrow.svg';
 
 export default function Span() {
     return (
-        <div className='mt-[13px] w-[259px] h-[45px] flex justify-around items-center'>
+        <div className='mt-[13px] w-[259px] h-[45px] flex justify-between items-center'>
             <span className='w-[41px] text-white flex flex-col items-center'>
                 <Plus className='stroke-current'/>
                 <p className='w-[100vw] text-[13.64px] font-normal text-center'>My List</p>

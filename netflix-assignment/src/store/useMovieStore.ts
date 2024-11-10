@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { fetchMovies, fetchTvShows } from '../api/tmdb';
+import { fetchMovies, fetchMoviesByCategory, fetchTvShows } from '../api/tmdb';
 import { Movie } from '../types/movie';
 import { TvShow } from '../types/tvshows';
 
@@ -9,6 +9,7 @@ type ContentState = {
   fetchMovies: () => Promise<void>;
   fetchTvShows: () => Promise<void>;
   fetchAllContent: () => Promise<void>;
+  fetchCategoryMovies: (category: string) => Promise<void>;
 };
 
 export const useContentStore = create<ContentState>((set) => ({
@@ -44,4 +45,9 @@ export const useContentStore = create<ContentState>((set) => ({
       console.error('Error fetching all content:', error);
     }
   },
+  fetchCategoryMovies: async (category: string) => {
+    const movies = await fetchMoviesByCategory(category);
+    set({ movies });
+  },
 }));
+

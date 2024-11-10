@@ -36,11 +36,15 @@ export default function Header() {
                 backgroundImage: `url(https://image.tmdb.org/t/p/original${randomMovie?.backdrop_path})`,
               }}
             >
+            {/* 그림자 그라데이션 추가 */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+            
             <NavBar/>
+            
             <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex justify-center items-center gap-[5px]">
               <Top10/>
               <span className="text-[13.72px] font-bold text-center">
-                #{randomIndex} in Korea Today
+                #{randomIndex+1} in Korea Today
               </span>
             </div>
         </header>
