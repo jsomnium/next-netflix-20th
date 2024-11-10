@@ -1,7 +1,7 @@
 "use client"
 
 import { Movie } from '@/types/movie';
-import { useContentStore } from '../../../../store/useMovieStore';
+import { useContentStore } from '../../../../store/useContentStore';
 import { TvShow } from '@/types/tvshows';
 
 type Props = {

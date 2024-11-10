@@ -1,6 +1,6 @@
 "use client"
 
-import { useContentStore } from '@/store/useMovieStore';
+import { useContentStore } from '@/store/useContentStore';
 import { tvCategories } from '../../../../data/categories';
 import ContentRow from './ContentRow';
 import { useEffect } from 'react';

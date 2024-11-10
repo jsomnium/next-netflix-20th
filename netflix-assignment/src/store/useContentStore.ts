@@ -27,7 +27,6 @@ export const useContentStore = create<ContentState>((set) => ({
           const movieResults = await Promise.all(moviePromises);
           const movies = movieCategories.reduce((acc, category, index) => {
             acc[category] = movieResults[index];
-            console.log(acc);
             return acc;
           }, {} as { [key: string]: Movie[] });
     

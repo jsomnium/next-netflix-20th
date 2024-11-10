@@ -1,6 +1,6 @@
 "use client"
 
-import { useContentStore } from "@/store/useMovieStore";
+import { useContentStore } from "@/store/useContentStore";
 import { useEffect, useState } from "react";
 import { Movie } from "@/types/movie";
 import NavBar from "./NavBar";

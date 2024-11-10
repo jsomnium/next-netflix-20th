@@ -1,6 +1,6 @@
 "use client"
 import { useEffect } from 'react';
-import { useContentStore } from '../../../../store/useMovieStore';
+import { useContentStore } from '../../../../store/useContentStore';
 import { Movie } from '../../../../types/movie';
 import { TvShow } from '@/types/tvshows';
 
@@ -15,13 +15,20 @@ export default function Preview() {
     const combinedMovies = Object.values(movies).flat();
     const combinedTvShows = Object.values(tvShows).flat();
     const combinedContent: (Movie | TvShow)[] = [...combinedMovies, ...combinedTvShows];
-    if (combinedContent.length === 0) return null;
+    const getRandomItems = (content: (Movie | TvShow)[], count: number) => {
+        const shuffled = content.sort(() => 0.5 - Math.random()); // 배열 섞기
+        return shuffled.slice(0, count); // 앞에서부터 count 개수만큼 자르기
+    };
+
+    const randomContent = getRandomItems(combinedContent, 20);
+
+    if (randomContent.length === 0) return null;
 
   return (
     <section className="w-full mt-[33px]">
       <h2 className="text-[26.75px] font-bold mb-[23px]">Previews</h2>
       <article className="flex items-center overflow-x-scroll scrollbar-hide gap-[7px]">
-        {combinedContent.map((item, index) => (
+        {randomContent.map((item, index) => (
           <div
             key={index}
             className="min-w-[102px] min-h-[102px] w-[102px] h-[102px] flex-shrink-0 overflow-hidden "

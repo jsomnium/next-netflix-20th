@@ -6,7 +6,7 @@ export default function NavBar() {
       {[<Logo/>, "TV Shows", "Movies", "My List"].map((item, index) => (
             <button
               key={index}
-              className="text-white text-[17.2px] font-normal"
+              className="text-white text-[17.2px] font-normal hover:text-[#8C8787]"
             >
               {item}
             </button>
