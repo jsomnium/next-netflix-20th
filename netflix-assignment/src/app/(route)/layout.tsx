@@ -7,11 +7,11 @@ export default function RouteLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="relative w-[375px] h-[100vh]">
-        {children}
-        <Footer/>
-      </body>
-    </html>
+    <body>
+        <div className="relative w-[375px] h-[100vh]">
+            {children}
+            <Footer/>
+        </div>
+    </body>
   );
 }
