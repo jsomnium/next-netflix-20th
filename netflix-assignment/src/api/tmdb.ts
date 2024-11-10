@@ -28,13 +28,24 @@ export const fetchMoviesByCategory = async (category: string): Promise<Movie[]> 
       const response = await axios.get(`/api/movies/${category}`, {
         params: { language: 'en-US', page: 1 },
       });
-      console.log(response.data.results);
       return response.data.results;
     } catch (error) {
-        console.log('here')
       console.error(`Error fetching movies for category ${category}:`, error);
       return [];
     }
   };
+  export const fetchTVByCategory = async (category: string): Promise<TvShow[]> => {
+    try {
+      const response = await axios.get(`/api/tv/${category}`, {
+        params: { language: 'en-US', page: 1 },
+      });
+      return response.data.results;
+    } catch (error) {
+      console.error(`Error fetching tvshow for category ${category}:`, error);
+      return [];
+    }
+  };
+
+
   
   

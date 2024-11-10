@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { fetchMovies, fetchMoviesByCategory, fetchTvShows } from '../api/tmdb';
+import { fetchMovies, fetchMoviesByCategory, fetchTVByCategory, fetchTvShows } from '../api/tmdb';
 import { Movie } from '../types/movie';
 import { TvShow } from '../types/tvshows';
 
@@ -45,9 +45,15 @@ export const useContentStore = create<ContentState>((set) => ({
       console.error('Error fetching all content:', error);
     }
   },
+  // 카테고리별 영화 데이터를 가져오는 함수
   fetchCategoryMovies: async (category: string) => {
     const movies = await fetchMoviesByCategory(category);
     set({ movies });
+  },
+  // 카테고리별 영화 데이터를 가져오는 함수
+  fetchCategoryTvShows: async (category: string) => {
+    const tvShows = await fetchTVByCategory(category);
+    set({ tvShows });
   },
 }));
 

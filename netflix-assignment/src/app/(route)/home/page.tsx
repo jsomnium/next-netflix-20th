@@ -7,11 +7,13 @@ import Span from './_components/Span';
 
 export default function Home() {
   return (
-    <div className='scrollbar-hide w-full h-[100vh] flex flex-col items-center'>
+    <div className='overflow-y-auto scrollbar-hide w-full min-h-[100vh] flex flex-col items-center'>
       <Header/>
       <Span/>
       <Preview/>
-      {/* <MovieRow category='trending' title='Trending Now'/> */}
+      <MovieRow category='popular' title='Popular'/>
+      <MovieRow category='top_rated' title='Top Rated'/>
+
       {/* <MovieCategory/> */}
     </div>
   );
