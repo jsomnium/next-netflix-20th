@@ -1,59 +1,53 @@
 import { create } from 'zustand';
-import { fetchMovies, fetchMoviesByCategory, fetchTVByCategory, fetchTvShows } from '../api/tmdb';
+import { fetchMoviesByCategory, fetchTVByCategory } from '../api/tmdb';
 import { Movie } from '../types/movie';
 import { TvShow } from '../types/tvshows';
 
 type ContentState = {
-  movies: Movie[];
-  tvShows: TvShow[];
-  fetchMovies: () => Promise<void>;
-  fetchTvShows: () => Promise<void>;
-  fetchAllContent: () => Promise<void>;
-  fetchCategoryMovies: (category: string) => Promise<void>;
+    movies: { [key: string]: Movie[] };
+    tvShows: { [key: string]: TvShow[] };
+    loading: boolean;
+    fetchAllContents: () => Promise<void>;
 };
 
 export const useContentStore = create<ContentState>((set) => ({
-  movies: [],
-  tvShows: [],
+    movies: {},
+    tvShows: {},
+    loading: false,
 
-  // 영화 데이터만 가져오는 함수
-  fetchMovies: async () => {
-    try {
-      const movies = await fetchMovies();
-      set({ movies });
-    } catch (error) {
-      console.error('Error fetching movies:', error);
-    }
-  },
 
-  // TV 프로그램 데이터만 가져오는 함수
-  fetchTvShows: async () => {
-    try {
-      const tvShows = await fetchTvShows();
-      set({ tvShows });
-    } catch (error) {
-      console.error('Error fetching TV shows:', error);
-    }
-  },
-
-  // 영화와 TV 프로그램 데이터를 모두 가져오는 함수
-  fetchAllContent: async () => {
-    try {
-      const [movies, tvShows] = await Promise.all([fetchMovies(), fetchTvShows()]);
-      set({ movies, tvShows });
-    } catch (error) {
-      console.error('Error fetching all content:', error);
-    }
-  },
-  // 카테고리별 영화 데이터를 가져오는 함수
-  fetchCategoryMovies: async (category: string) => {
-    const movies = await fetchMoviesByCategory(category);
-    set({ movies });
-  },
-  // 카테고리별 영화 데이터를 가져오는 함수
-  fetchCategoryTvShows: async (category: string) => {
-    const tvShows = await fetchTVByCategory(category);
-    set({ tvShows });
-  },
+    fetchAllContents: async () => {
+        set({ movies: {}, tvShows: {}, loading: true }); // 기존 데이터 초기화
+        try {
+          // 영화 카테고리별로 가져오기
+          const movieCategories = ['popular', 'top_rated', 'now_playing', 'upcoming'];
+          const moviePromises = movieCategories.map((category) =>
+            fetchMoviesByCategory(category)
+          );
+          const movieResults = await Promise.all(moviePromises);
+          const movies = movieCategories.reduce((acc, category, index) => {
+            acc[category] = movieResults[index];
+            console.log(acc);
+            return acc;
+          }, {} as { [key: string]: Movie[] });
+    
+          // TV 시리즈 카테고리별로 가져오기
+          const tvCategories = ['popular', 'top_rated', 'airing_today', 'on_the_air'];
+          const tvPromises = tvCategories.map((category) =>
+            fetchTVByCategory(category)
+          );
+          const tvResults = await Promise.all(tvPromises);
+          const tvShows = tvCategories.reduce((acc, category, index) => {
+            acc[category] = tvResults[index];
+            return acc;
+          }, {} as { [key: string]: TvShow[] });
+    
+          set({ movies, tvShows });
+        } catch (error) {
+          console.error('Error fetching all contents:', error);
+        } finally {
+          set({ loading: false });
+        }
+    },
 }));
 

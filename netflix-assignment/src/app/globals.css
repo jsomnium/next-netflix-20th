@@ -17,6 +17,6 @@ html, body {
   justify-content: center;
   align-items: center;
   background-color: black;
+  overflow-y: auto;
   color: white;
-  overflow: hidden;
 }
