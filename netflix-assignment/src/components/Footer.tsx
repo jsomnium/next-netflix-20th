@@ -42,7 +42,7 @@ export default function Footer() {
     };
 
     return (
-        <footer className="absolute bottom-0 w-full h-[53px] flex justify-around items-center bg-black">
+        <footer className="absolute bottom-0 w-full h-[48px] flex justify-around items-center">
             {navItems.map((item) => {
                 const Icon = item.icon;
                 const isActive = activeIndex === item.id;
@@ -51,7 +51,7 @@ export default function Footer() {
                     <button
                         key={item.id}
                         onClick={() => handleNavigation(item.id)}
-                        className={`w-[53px] h-[53px] flex flex-col justify-center items-center gap-1 ${
+                        className={`w-[48px] h-[48px] flex flex-col justify-center items-center gap-1 ${
                             activeIndex === item.id ? "text-white" : "text-[#8C8787]"
                         }`}
                     >
