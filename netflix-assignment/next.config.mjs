@@ -9,7 +9,6 @@ const nextConfig = {
   },
   async rewrites() {
     return [
-
       // 영화 데이터를 카테고리별로 가져오는 프록시 설정
       {
         source: '/movie/:category',
