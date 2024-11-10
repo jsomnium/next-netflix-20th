@@ -27,6 +27,7 @@ export default function Header() {
     useEffect(() => {
         setRandomMovie(getRandomMovie());
     }, [movies]);
+    
 
     
     return (
