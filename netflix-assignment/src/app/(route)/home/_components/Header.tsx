@@ -5,21 +5,17 @@ import { useEffect, useState } from "react";
 import { Movie } from "@/types/movie";
 import NavBar from "./NavBar";
 import Top10 from "../../../../assets/svg/Top10.svg";
+import { useFetchAllMovies } from "@/hooks/useFetchContents";
 
 export default function Header() {
-    const { movies, fetchAllContents, loading } = useContentStore();
+    const { data: movies, isLoading } = useFetchAllMovies();
     const [randomIndex, setRandomIndex] = useState<number>(0);
     const [randomMovie, setRandomMovie] = useState<Movie | null>(null);
 
 
-    
-    useEffect(() => {
-        fetchAllContents();
-      }, []);
-
     // 랜덤한 영화를 선택하는 함수
     const getRandomMovie = () => {
-        if (movies.popular && movies.popular.length > 0) {
+        if (movies?.popular && movies.popular.length > 0) {
         const index = Math.floor(Math.random() * (movies.popular.length / 2));
         setRandomIndex(index);
         return movies.popular[index];
@@ -29,11 +25,11 @@ export default function Header() {
 
     // 데이터 로딩이 완료되면 랜덤 영화 선택
     useEffect(() => {
-        if (!loading) {
+        if (!isLoading) {
         const randomMovie = getRandomMovie();
         setRandomMovie(randomMovie);
         }
-    }, [movies, loading]);
+    }, [movies, isLoading]);
 
     
     return (

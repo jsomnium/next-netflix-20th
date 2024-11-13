@@ -4,21 +4,19 @@ import { useContentStore } from '@/store/useContentStore';
 import {  movieCategories } from '../../../../data/categories';
 import ContentRow from './ContentRow';
 import { useEffect } from 'react';
+import { useFetchAllMovies } from '@/hooks/useFetchContents';
 
 export default function MovieCategory() {
-    const { fetchAllContents, movies, loading } = useContentStore();
+    const { data: movies, isLoading } = useFetchAllMovies();
 
-  useEffect(() => {
-    fetchAllContents();
-  }, []);
 
-  if (loading) {
+  if (isLoading) {
     return <div className="text-center">Loading...</div>;
   }
   return (
     <>
       {movieCategories.map((item) => (
-        <ContentRow key={item.category} title={item.title} content={movies[item.category]}/>
+        <ContentRow key={item.category} title={item.title} content={movies?[item.category]}/>
       ))}
     </>
   );
