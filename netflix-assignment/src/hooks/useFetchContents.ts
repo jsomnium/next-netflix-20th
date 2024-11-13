@@ -5,12 +5,18 @@ import { TvShow } from '@/types/tvshows';
 
 const fetchMoviesByCategory = async (category: string): Promise<Movie[]> => {
   const response = await axios.get(`/movie/${category}`);
-  return response.data;
+  return response.data.map((movie: Movie) => ({
+    ...movie,
+    media_type: 'movie', // 수동으로 media_type 추가
+  }));
 };
 
 const fetchTvShowsByCategory = async (category: string): Promise<TvShow[]> => {
   const response = await axios.get(`/tv/${category}`);
-  return response.data;
+  return response.data.map((tvShow: TvShow) => ({
+    ...tvShow,
+    media_type: 'tv', // 수동으로 media_type 추가
+  }));
 };
 
 // 모든 카테고리의 영화를 가져오는 함수

@@ -3,6 +3,7 @@
 import { Movie } from '../../../../types/movie';
 import { TvShow } from '@/types/tvshows';
 import { useFetchAllMovies, useFetchAllTvShows } from '@/hooks/useFetchContents';
+import Link from 'next/link';
 
 export default function Preview() {
     const { data: movies } = useFetchAllMovies();
@@ -31,8 +32,9 @@ export default function Preview() {
       <h2 className="text-[26.75px] font-bold mb-[23px]">Previews</h2>
       <article className="flex items-center overflow-x-scroll scrollbar-hide gap-[7px]">
         {randomContent.map((item, index) => (
-          <div
+          <Link
             key={index}
+            href={`/content_details/${item.media_type}/${item.id}`}
             className="min-w-[102px] min-h-[102px] w-[102px] h-[102px] flex-shrink-0 overflow-hidden "
           >
             <img
@@ -44,7 +46,7 @@ export default function Preview() {
               }
               className="w-full h-full object-cover rounded-full"
             />
-          </div>
+          </Link>
         ))}
       </article>
     </section>
