@@ -13,5 +13,6 @@ export type Movie = {
     vote_count: number;
     adult: boolean;
     video: boolean;
+    media_type: string;
   };
   

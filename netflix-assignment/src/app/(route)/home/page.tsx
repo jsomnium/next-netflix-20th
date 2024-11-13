@@ -1,7 +1,5 @@
-import { useContentStore } from '@/store/useContentStore';
 import Header from './_components/Header';
 import MovieCategory from './_components/MovieCategory';
-import MovieRow from './_components/ContentRow';
 import NavBar from './_components/NavBar';
 import Preview from './_components/Preview';
 import Span from './_components/Span';

@@ -13,5 +13,6 @@ export type TvShow = {
     vote_average: number;
     vote_count: number;
     adult: boolean;
+    media_type: string;
   };
   

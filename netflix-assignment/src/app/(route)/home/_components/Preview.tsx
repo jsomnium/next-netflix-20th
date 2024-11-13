@@ -1,15 +1,18 @@
 "use client"
-import { useEffect } from 'react';
-import { useContentStore } from '../../../../store/useContentStore';
+
 import { Movie } from '../../../../types/movie';
 import { TvShow } from '@/types/tvshows';
+import { useFetchAllMovies, useFetchAllTvShows } from '@/hooks/useFetchContents';
+import Link from 'next/link';
 
 export default function Preview() {
-    const { movies, tvShows, fetchAllContents } = useContentStore();
+    const { data: movies } = useFetchAllMovies();
+    const { data: tvShows } = useFetchAllTvShows();
 
-    useEffect(() => {
-      fetchAllContents();
-    }, []);
+    if (!movies || !tvShows) {
+        return null; // 데이터가 로드되지 않았을 경우
+      }
+
   
     // 데이터를 모두 통합해서 하나의 배열로 병합
     const combinedMovies = Object.values(movies).flat();
@@ -29,8 +32,9 @@ export default function Preview() {
       <h2 className="text-[26.75px] font-bold mb-[23px]">Previews</h2>
       <article className="flex items-center overflow-x-scroll scrollbar-hide gap-[7px]">
         {randomContent.map((item, index) => (
-          <div
+          <Link
             key={index}
+            href={`/content_details/${item.media_type}/${item.id}`}
             className="min-w-[102px] min-h-[102px] w-[102px] h-[102px] flex-shrink-0 overflow-hidden "
           >
             <img
@@ -42,7 +46,7 @@ export default function Preview() {
               }
               className="w-full h-full object-cover rounded-full"
             />
-          </div>
+          </Link>
         ))}
       </article>
     </section>

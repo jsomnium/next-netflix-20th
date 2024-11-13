@@ -1,25 +1,20 @@
 "use client"
 
-import { useContentStore } from '@/store/useContentStore';
 import { tvCategories } from '../../../../data/categories';
 import ContentRow from './ContentRow';
-import { useEffect } from 'react';
+import { useFetchAllTvShows } from '@/hooks/useFetchContents';
 
 export default function TvCategory() {
-    const { fetchAllContents, tvShows, loading } = useContentStore();
+    const { data: tvShows, isLoading } = useFetchAllTvShows();
 
-  useEffect(() => {
-    fetchAllContents();
-  }, []);
-
-  if (loading) {
-    return <div className="text-center">Loading...</div>;
-  }
-  return (
-    <>
-      {tvCategories.map((item) => (
-        <ContentRow key={item.category} title={item.title} content={tvShows[item.category]}/>
-      ))}
-    </>
-  );
+    if (isLoading) {
+        return <div className="text-center">Loading...</div>;
+    }
+    return (
+        <>
+        {tvCategories.map((item) => (
+            <ContentRow key={item.category} title={item.title} content={tvShows?.[item.category] ?? []}/>
+        ))}
+        </>
+    );
 }
