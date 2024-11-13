@@ -1,13 +1,12 @@
 "use client"
 
 import { Movie } from '@/types/movie';
-import { useContentStore } from '../../../../store/useContentStore';
 import { TvShow } from '@/types/tvshows';
 
 type Props = {
   title: string;
 
-  content: Movie[] | TvShow[];
+  content: Movie[] | TvShow[] | null; 
 
 };
 

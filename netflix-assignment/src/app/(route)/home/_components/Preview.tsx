@@ -1,15 +1,17 @@
 "use client"
-import { useEffect } from 'react';
-import { useContentStore } from '../../../../store/useContentStore';
+
 import { Movie } from '../../../../types/movie';
 import { TvShow } from '@/types/tvshows';
+import { useFetchAllMovies, useFetchAllTvShows } from '@/hooks/useFetchContents';
 
 export default function Preview() {
-    const { movies, tvShows, fetchAllContents } = useContentStore();
+    const { data: movies } = useFetchAllMovies();
+    const { data: tvShows } = useFetchAllTvShows();
 
-    useEffect(() => {
-      fetchAllContents();
-    }, []);
+    if (!movies || !tvShows) {
+        return null; // 데이터가 로드되지 않았을 경우
+      }
+
   
     // 데이터를 모두 통합해서 하나의 배열로 병합
     const combinedMovies = Object.values(movies).flat();

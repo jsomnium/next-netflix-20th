@@ -1,9 +1,7 @@
 "use client"
 
-import { useContentStore } from '@/store/useContentStore';
 import {  movieCategories } from '../../../../data/categories';
 import ContentRow from './ContentRow';
-import { useEffect } from 'react';
 import { useFetchAllMovies } from '@/hooks/useFetchContents';
 
 export default function MovieCategory() {
@@ -16,7 +14,8 @@ export default function MovieCategory() {
   return (
     <>
       {movieCategories.map((item) => (
-        <ContentRow key={item.category} title={item.title} content={movies?[item.category]}/>
+        <ContentRow key={item.category} title={item.title} content={movies?.[item.category] ?? []}
+        />
       ))}
     </>
   );

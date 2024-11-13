@@ -1,9 +1,7 @@
 "use client"
 
-import { useContentStore } from "@/store/useContentStore";
 import { useEffect, useState } from "react";
 import { Movie } from "@/types/movie";
-import NavBar from "./NavBar";
 import Top10 from "../../../../assets/svg/Top10.svg";
 import { useFetchAllMovies } from "@/hooks/useFetchContents";
 
@@ -26,8 +24,8 @@ export default function Header() {
     // 데이터 로딩이 완료되면 랜덤 영화 선택
     useEffect(() => {
         if (!isLoading) {
-        const randomMovie = getRandomMovie();
-        setRandomMovie(randomMovie);
+            const randomMovie = getRandomMovie();
+            setRandomMovie(randomMovie);
         }
     }, [movies, isLoading]);
 
